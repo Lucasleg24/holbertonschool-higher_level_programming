@@ -1,16 +1,18 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 def roman_to_int(roman_string):
     if not roman_string or not isinstance(roman_string, str):
         return 0
 
     roman_dict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
     total = 0
-    length = len(roman_string)
+    prev_value = 0
 
-    for i in range(length):
-        if i < length - 1 and roman_dict[roman_string[i]] < roman_dict[roman_string[i + 1]]:
-            total -= roman_dict[roman_string[i]]
+    for char in reversed(roman_string):
+        value = roman_dict.get(char, 0)
+        if value < prev_value:
+            total -= value
         else:
-            total += roman_dict[roman_string[i]]
+            total += value
+        prev_value = value
 
     return total
