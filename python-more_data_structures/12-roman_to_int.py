@@ -1,19 +1,16 @@
 #!/usr/bin/python
 def roman_to_int(roman_string):
-    a = 0
-    for i in roman_string:
-        if i == "I":
-            a += 1
-        elif i == "V":
-            a += 5
-        elif i == "X":
-            a += 10
-        elif i == "L":
-            a += 50
-        elif i == "C":
-            a += 100
-        elif i == "D":
-            a += 500
-        elif i == "M":
-            a += 1000
-    return a
+    if not roman_string or not isinstance(roman_string, str):
+        return 0
+
+    roman_dict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    total = 0
+    length = len(roman_string)
+
+    for i in range(length):
+        if i < length - 1 and roman_dict[roman_string[i]] < roman_dict[roman_string[i + 1]]:
+            total -= roman_dict[roman_string[i]]
+        else:
+            total += roman_dict[roman_string[i]]
+
+    return total
