@@ -9,4 +9,4 @@ try:
 except Exception as e:
     print(e)
 
-say_my_name()
+say_my_name(None)
