@@ -5,7 +5,12 @@
 
 def matrix_divided(matrix, div):
 
-    """Divide each number by div"""
+    """
+    matrix_divided Divide each number by div
+    
+    matrix: contain the matrice
+    div: contain the divisor
+    """
 
     if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix):
         raise TypeError("matrix must be a matrix (list of lists) of integers/floats")
