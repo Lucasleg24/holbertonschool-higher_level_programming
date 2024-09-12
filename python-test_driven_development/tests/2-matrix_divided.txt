@@ -31,3 +31,8 @@ TypeError: matrix_divided() missing 2 required positional arguments: 'matrix' an
 >>> matrix_divided(matrix, float('Inf'))
 ...
 [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+
+>>> matrix_divided(matrix, 0)
+Traceback (most recent call last)
+...
+ZeroDivisionError: division by zero
