@@ -1,5 +1,17 @@
 #!/usr/bin/python3
+
+"""
+Contain the function
+"""
+
+
 def print_square(size):
+
+    """
+    print size square
+    size: value at print
+    """
+
     if not isinstance(size, int):
         raise TypeError("size must be an integer")
     if size < 0:
