@@ -14,3 +14,27 @@ TypeError: text must be a string
 
 >>> text_indentation(".")
 .
+
+>>> text_indentation({})
+Traceback (most recent call last):
+...
+TypeError: text must be a string
+
+>>> text_indentation("START       ?    ")
+START       ?
+
+
+>>> text_indentation("     MIDDLE     :")
+MIDDLE     :
+
+
+>>> text_indentation("             END.")
+END.
+
+
+>>> text_indentation("?:.")
+?
+<BLANKLINE>
+:
+<BLANKLINE>
+.
