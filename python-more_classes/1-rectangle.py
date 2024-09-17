@@ -1,6 +1,16 @@
 #!/usr/bin/python3
 
+"""
+contain the class
+"""
+
+
 class Rectangle:
+
+    """
+    contain the arguments and methods
+    """
+
     def __init__(self, width=0, height=0):
         self.__width = width
         self.__height = height
