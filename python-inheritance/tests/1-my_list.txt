@@ -76,3 +76,11 @@
 >>> single_element_list.append(42)
 >>> single_element_list.print_sorted()
 [42]
+
+>>> negative_list = MyList()
+>>> negative_list.append(-1)
+>>> negative_list.append(-3)
+>>> negative_list.append(0)
+>>> negative_list.append(2)
+>>> negative_list.print_sorted()
+[-3, -1, 0, 2]
