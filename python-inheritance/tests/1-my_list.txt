@@ -71,3 +71,8 @@
 >>> duplicate_list.append(1)
 >>> duplicate_list.print_sorted()
 [1, 2, 2, 4, 4]
+
+>>> single_element_list = MyList()
+>>> single_element_list.append(42)
+>>> single_element_list.print_sorted()
+[42]
