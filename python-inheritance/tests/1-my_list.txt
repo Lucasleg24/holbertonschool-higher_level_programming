@@ -55,3 +55,10 @@
 >>> my_list = MyList()
 >>> my_list.print_sorted()
 []
+
+>>> same_elements_list = MyList()
+>>> same_elements_list.append(7)
+>>> same_elements_list.append(7)
+>>> same_elements_list.append(7)
+>>> same_elements_list.print_sorted()
+[7, 7, 7]
