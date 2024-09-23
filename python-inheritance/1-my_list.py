@@ -13,4 +13,8 @@ class MyList(list):
 
     def print_sorted(self):
 
+        """
+        print the list
+        """
+
         print(sorted(self))
