@@ -62,3 +62,12 @@
 >>> same_elements_list.append(7)
 >>> same_elements_list.print_sorted()
 [7, 7, 7]
+
+>>> duplicate_list = MyList()
+>>> duplicate_list.append(4)
+>>> duplicate_list.append(4)
+>>> duplicate_list.append(2)
+>>> duplicate_list.append(2)
+>>> duplicate_list.append(1)
+>>> duplicate_list.print_sorted()
+[1, 2, 2, 4, 4]
