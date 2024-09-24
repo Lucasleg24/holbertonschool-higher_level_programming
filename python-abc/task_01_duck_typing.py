@@ -5,7 +5,7 @@ contain the class
 """
 
 from abc import ABC, abstractmethod
-import math
+from math import pi
 
 
 class Shape(ABC):
@@ -33,10 +33,10 @@ class Circle(Shape):
         self.radius = radius
 
     def area(self):
-        return math.pi * (self.radius ** 2)
+        return pi * (self.radius * self.radius)
 
     def perimeter(self):
-        return 2 * math.pi * self.radius
+        return (2 * self.radius) * pi
 
 
 class Rectangle(Shape):
@@ -58,5 +58,5 @@ class Rectangle(Shape):
 
 def shape_info(shape):
 
-    print("Area: {:.14f}".format(int(shape.area())))
-    print("Perimeter: {:.14f}".format(int(shape.perimeter())))
+    print("Area: {}".format(shape.area()))
+    print("Perimeter: {}".format(shape.perimeter()))
