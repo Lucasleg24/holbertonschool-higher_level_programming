@@ -58,9 +58,5 @@ class Rectangle(Shape):
 
 def shape_info(shape):
 
-    if isinstance(shape, Circle):
-        print("Area: {:.14f}".format(shape.area()))
-        print("Perimeter: {:.14f}".format(shape.perimeter()))
-    else:
-        print("Area: {}".format(int(shape.area())))
-        print("Perimeter: {}".format(int(shape.perimeter())))
+    print("Area: {:.14f}".format(int(shape.area())))
+    print("Perimeter: {:.14f}".format(int(shape.perimeter())))
