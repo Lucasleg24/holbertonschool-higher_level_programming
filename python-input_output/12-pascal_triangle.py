@@ -7,6 +7,10 @@ contain the triangle
 
 def pascal_triangle(n):
 
+    """
+    contain the code for print the pascal triangle
+    """
+
     g_list = []
     if n <= 0:
         return g_list
