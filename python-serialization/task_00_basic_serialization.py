@@ -19,8 +19,9 @@ def serialize_and_save_to_file(data, filename):
     except Exception as e:
         print(f"Error during data serialization and saving: {e}")
 
+
 def load_and_deserialize(filename):
-    
+
     """
     deserialize the data
     """
