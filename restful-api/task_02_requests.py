@@ -22,8 +22,8 @@ def fetch_and_print_posts():
         posts = response.json()
         for post in posts:
             print(post['title'])
-        else:
-            print("échec de la reqête")
+    else:
+        print("échec de larequete")
 
 
 def fetch_and_save_posts():
@@ -36,13 +36,13 @@ def fetch_and_save_posts():
     if response.status_code == 200:
         posts = response.json()
         posts_data = [
-                {
-                    'id': post['id'],
-                    'title': post['title'],
-                    'body': post['body']
-                }
-                for post in posts
-            ]
+            {
+                'id': post['id'],
+                'title': post['title'],
+                'body': post['body']
+            }
+            for post in posts
+        ]
 
         with open('posts.csv', mode='w', newline='', encoding='utf-8') as file:
             writer = csv.DictWriter(file, fieldnames=['id', 'title', 'body'])
@@ -50,4 +50,4 @@ def fetch_and_save_posts():
             writer.writerows(posts_data)
 
     else:
-        print("échec de la requê")
+        print("échec de la reqete")
