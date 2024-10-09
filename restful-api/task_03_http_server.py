@@ -2,7 +2,6 @@
 
 import json
 import http.server
-import socketserver
 
 """
 class for check the server with a little API
@@ -33,8 +32,9 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b"Endpoint not found")
 
+
 PORT = 8000
 
-with socketserver.TCPServer(("", PORT), SimpleHTTPRequestHandler) as httpd:
-    print(f"Serving on port {PORT}")
+
+with http.server.HTTPServer(("", PORT), SimpleHTTPRequestHandler) as httpd:
     httpd.serve_forever()
