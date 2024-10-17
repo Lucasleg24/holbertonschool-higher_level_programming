@@ -1,20 +1,18 @@
 #!/usr/bin/python3
-
 """
-Contain th def for test connecting server and admin access
+auth api with Flask, JWT and BasicAuth
 """
-
 
 from flask import Flask, jsonify, request
+from flask_jwt_extended import get_jwt_identity, \
+    create_access_token, JWTManager, jwt_required
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_jwt_extended import (
-    JWTManager, create_access_token, jwt_required, get_jwt_identity
-)
+
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "I_am_god"
-app.config["JWT_SECRET_KEY"] = "I_am_god"
+app.config["SECRET_KEY"] = "Test"
+app.config["JWT_SECRET_KEY"] = "Test"
 
 jwt = JWTManager(app)
 auth = HTTPBasicAuth()
@@ -22,12 +20,12 @@ auth = HTTPBasicAuth()
 users = {
     "user1": {
         "username": "user1",
-        "password": generate_password_hash("password1"),
+        "password": generate_password_hash("password"),
         "role": "user"
     },
     "admin1": {
         "username": "admin1",
-        "password": generate_password_hash("passwordadmin"),
+        "password": generate_password_hash("password"),
         "role": "admin"
     }
 }
@@ -35,9 +33,8 @@ users = {
 
 @auth.verify_password
 def verify_password(username, password):
-
     """
-    verify the password hash
+    if user exist in "database"
     """
 
     if username in users:
@@ -46,22 +43,10 @@ def verify_password(username, password):
     return None
 
 
-@app.route('/basic-protected')
-@auth.login_required
-def basic_protected():
-
+@app.route("/login", methods=["POST"])
+def user_login():
     """
-    return success access
-    """
-
-    return "message: Basic Auth: Access Granted", 200
-
-
-@app.route('/login', methods=['POST'])
-def login():
-
-    """
-    check the autorisatino access
+    new user and return jwt access token
     """
 
     username = request.json["username"]
@@ -81,36 +66,42 @@ def login():
     return jsonify(access_token=access_token), 200
 
 
-@app.route('/jwt-protected')
+@app.route("/basic-protected")
+@auth.login_required
+def basic_protected():
+    """
+    if user exist with BasicAuth
+    """
+
+    return "Basic Auth: Access Granted", 200
+
+
+@app.route("/jwt-protected")
 @jwt_required()
 def jwt_protected():
-
     """
-    check the access granted
+    if is a valid jwt token
     """
 
-    return "message: JWT Auth: Access Granted", 200
+    return "JWT Auth: Access Granted", 200
 
 
-@app.route('/admin-only')
+@app.route("/admin-only")
 @jwt_required()
 def admin_only():
-
     """
-    check the admin role
+    if user is a Admin
     """
 
-    current_user = get_jwt_identity()
-    if current_user['role'] != 'admin':
-        return jsonify({"error": "Admin access required"}), 403
-    return "message: Admin Access: Granted", 200
+    if get_jwt_identity()["role"] != "admin":
+        return {"error": "Admin access required"}, 403
+    return "Admin Access: Granted", 200
 
 
 @jwt.unauthorized_loader
 def handle_unauthorized_error(err):
-
     """
-    error token
+    unauthorized error of JWT
     """
 
     return jsonify({"error": "Missing or invalid token"}), 401
@@ -118,9 +109,8 @@ def handle_unauthorized_error(err):
 
 @jwt.invalid_token_loader
 def handle_invalid_token_error(err):
-
     """
-    error toekn
+    invalid token error of JWT
     """
 
     return jsonify({"error": "Invalid token"}), 401
@@ -128,9 +118,8 @@ def handle_invalid_token_error(err):
 
 @jwt.expired_token_loader
 def handle_expired_token_error(err):
-
     """
-    expired token
+    expired token error of JWT
     """
 
     return jsonify({"error": "Token has expired"}), 401
@@ -138,9 +127,8 @@ def handle_expired_token_error(err):
 
 @jwt.revoked_token_loader
 def handle_revoked_token_error(err):
-
     """
-    revoked token
+    revoked token error of JWT
     """
 
     return jsonify({"error": "Token has been revoked"}), 401
@@ -148,9 +136,8 @@ def handle_revoked_token_error(err):
 
 @jwt.needs_fresh_token_loader
 def handle_needs_fresh_token_error(err):
-
     """
-    token expired
+    needs fresh token error of JWT
     """
 
     return jsonify({"error": "Fresh token required"}), 401
