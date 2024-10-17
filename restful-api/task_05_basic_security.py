@@ -8,7 +8,9 @@ Contain th def for test connecting server and admin access
 from flask import Flask, jsonify, request
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import (
+    JWTManager, create_access_token, jwt_required, get_jwt_identity
+)
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
@@ -16,8 +18,16 @@ app.config['JWT_SECRET_KEY'] = 'your_secret_key'
 jwt = JWTManager(app)
 
 users = {
-    "user1": {"username": "user1", "password": generate_password_hash("password1"), "role": "user"},
-    "admin1": {"username": "admin1", "password": generate_password_hash("passwordadmin"), "role": "admin"}
+    "user1": {
+        "username": "user1",
+        "password": generate_password_hash("password1"),
+        "role": "user"
+    },
+    "admin1": {
+        "username": "admin1",
+        "password": generate_password_hash("passwordadmin"),
+        "role": "admin"
+    }
 }
 
 
@@ -63,7 +73,9 @@ def login():
     if not user or not check_password_hash(user['password'], password):
         return jsonify({"error": "Invalid credentials"}), 401
 
-    access_token = create_access_token(identity={"username": username, "role": user['role']})
+    access_token = create_access_token(
+            identity={"username": username, "role": user['role']}
+    )
     return jsonify(access_token=access_token)
 
 
