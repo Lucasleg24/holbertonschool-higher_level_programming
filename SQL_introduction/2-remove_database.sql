@@ -1,1 +1,2 @@
+-- 2 remove database
 DROP DATABASE hbtn_0c_0;
