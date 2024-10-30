@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-list all states or cities
+list all states
 """
 
 import sys
