@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """
 Get all rows of states table order by id ascending
 """
